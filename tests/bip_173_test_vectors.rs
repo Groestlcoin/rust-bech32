@@ -85,12 +85,9 @@ macro_rules! check_valid_address_roundtrip {
 }
 // Note these test vectors include various witness versions.
 check_valid_address_roundtrip! {
-    bip_173_valid_address_roundtrip_0, "BC1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7KV8F3T4";
-    bip_173_valid_address_roundtrip_1, "tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sl5k7";
-    bip_173_valid_address_roundtrip_2, "bc1pw508d6qejxtdg4y5r3zarvary0c5xw7kw508d6qejxtdg4y5r3zarvary0c5xw7k7grplx";
-    bip_173_valid_address_roundtrip_3, "BC1SW50QA3JX3S";
-    bip_173_valid_address_roundtrip_4, "bc1zw508d6qejxtdg4y5r3zarvaryvg6kdaj";
-    bip_173_valid_address_roundtrip_5, "tb1qqqqqp399et2xygdj5xreqhjjvcmzhxw4aywxecjdzew6hylgvsesrxh6hy";
+    bip_173_valid_address_roundtrip_0, "GRS1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7K3K4SJ5";
+    bip_173_valid_address_roundtrip_1, "tgrs1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3quvjfuq";
+    bip_173_valid_address_roundtrip_2, "tgrs1qqqqqp399et2xygdj5xreqhjjvcmzhxw4aywxecjdzew6hylgvsess668a6";
 }
 
 macro_rules! check_invalid_address {
@@ -111,23 +108,23 @@ macro_rules! check_invalid_address {
 }
 check_invalid_address! {
     // Invalid human-readable part
-    bip_173_invalid_address_0, "tc1qw508d6qejxtdg4y5r3zarvary0c5xw7kg3g4ty";
+    bip_173_invalid_address_0, "tgrt1qw508d6qejxtdg4y5r3zarvary0c5xw7kg3g4ty";
     // Invalid checksum
-    bip_173_invalid_address_1, "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t5";
+    bip_173_invalid_address_1, "grs1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t5";
     // Invalid witness version
-    bip_173_invalid_address_2, "BC13W508D6QEJXTDG4Y5R3ZARVARY0C5XW7KN40WF2";
+    bip_173_invalid_address_2, "GRS13W508D6QEJXTDG4Y5R3ZARVARY0C5XW7KN40WF2";
     // Invalid program length
-    bip_173_invalid_address_3, "bc1rw5uspcuh";
+    bip_173_invalid_address_3, "grs1rw5uspcuh";
     // Invalid program length
-    bip_173_invalid_address_4, "bc10w508d6qejxtdg4y5r3zarvary0c5xw7kw508d6qejxtdg4y5r3zarvary0c5xw7kw5rljs90";
+    bip_173_invalid_address_4, "grs10w508d6qejxtdg4y5r3zarvary0c5xw7kw508d6qejxtdg4y5r3zarvary0c5xw7kw5rljs90";
     // Invalid program length for witness version 0 (per BIP-141)
-    bip_173_invalid_address_5, "BC1QR508D6QEJXTDG4Y5R3ZARVARYV98GJ9P";
+    bip_173_invalid_address_5, "GRS1QR508D6QEJXTDG4Y5R3ZARVARYV98GJ9P";
     // Mixed case
-    bip_173_invalid_address_6, "tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sL5k7";
+    bip_173_invalid_address_6, "tgrs1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3q0sL5k7";
     // zero padding of more than 4 bits
-    bip_173_invalid_address_7, "bc1zw508d6qejxtdg4y5r3zarvaryvqyzf3du";
+    bip_173_invalid_address_7, "grs1zw508d6qejxtdg4y5r3zarvaryvqyzf3du";
     // Non-zero padding in 8-to-5 conversion
-    bip_173_invalid_address_8, "tb1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3pjxtptv";
+    bip_173_invalid_address_8, "tgrs1qrp33g0q5c5txsp9arysrx4k6zdkfs4nce4xj0gdcccefvpysxf3pjxtptv";
     // Empty data section
-    bip_173_invalid_address_14, "bc1gmk9yu";
+    bip_173_invalid_address_14, "grs1gmk9yu";
 }

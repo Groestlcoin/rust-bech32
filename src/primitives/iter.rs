@@ -304,7 +304,7 @@ mod tests {
     use super::*;
 
     // Tests below using this data, are based on the test vector (from BIP-173):
-    // BC1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7KV8F3T4: 0014751e76e8199196d454941c45d1b3a323f1433bd6
+    // GRS1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7K3K4SJ5: 0014751e76e8199196d454941c45d1b3a323f1433bd6
     #[rustfmt::skip]
     const DATA: [u8; 20] = [
         0x75, 0x1e, 0x76, 0xe8, 0x19, 0x91, 0x96, 0xd4,

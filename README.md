@@ -9,7 +9,7 @@ and Bech32m encoding format described in [BIP-0350](https://github.com/bitcoin/b
 
 You can find some usage examples in the [documentation](https://docs.rs/bech32/).
 
-Bitcoin-specific address encoding is handled by the `bitcoin-bech32` crate.
+Groestlcoin-specific address encoding is handled by the `groestlcoin-bech32` crate.
 
 
 ## MSRV

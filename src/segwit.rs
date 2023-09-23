@@ -21,17 +21,17 @@
 //! ];
 //!
 //! // Encode a taproot address suitable for use on mainnet.
-//! let _ = segwit::encode_v1(&hrp::BC, &witness_prog);
+//! let _ = segwit::encode_v1(&hrp::GRS, &witness_prog);
 //!
 //! // Encode a segwit v0 address suitable for use on testnet.
-//! let _ = segwit::encode_v0(&hrp::TB, &witness_prog);
+//! let _ = segwit::encode_v0(&hrp::TGRS, &witness_prog);
 //!
 //! // If you have the witness version already you can use:
 //! # let witness_version = segwit::VERSION_0;
-//! let _ = segwit::encode(&hrp::BC, witness_version, &witness_prog);
+//! let _ = segwit::encode(&hrp::GRS, witness_version, &witness_prog);
 //!
-//! // Decode a Bitcoin bech32 segwit address.
-//! let address = "bc1q2s3rjwvam9dt2ftt4sqxqjf3twav0gdx0k0q2etxflx38c3x8tnssdmnjq";
+//! // Decode a Groestlcoin bech32 segwit address.
+//! let address = "grs1q2s3rjwvam9dt2ftt4sqxqjf3twav0gdx0k0q2etxflx38c3x8tnslkylay";
 //! let (hrp, witness_version, witness_program) = segwit::decode(address).expect("failed to decode address");
 //! # }
 //! ```
@@ -61,7 +61,7 @@ use crate::primitives::{Bech32, Bech32m};
 ///
 /// ```
 /// use bech32::segwit;
-/// let address = "bc1py3m7vwnghyne9gnvcjw82j7gqt2rafgdmlmwmqnn3hvcmdm09rjqcgrtxs";
+/// let address = "grs1py3m7vwnghyne9gnvcjw82j7gqt2rafgdmlmwmqnn3hvcmdm09rjqhnu8f5";
 /// let (_hrp, _witness_version, _witness_program) = segwit::decode(address).expect("failed to decode address");
 /// ```
 #[cfg(feature = "alloc")]
@@ -230,8 +230,8 @@ mod tests {
     fn roundtrip_valid_mainnet_addresses() {
         // A few recent addresses from mainnet (Block 801266).
         let addresses = vec![
-            "bc1q2s3rjwvam9dt2ftt4sqxqjf3twav0gdx0k0q2etxflx38c3x8tnssdmnjq", // Segwit v0
-            "bc1py3m7vwnghyne9gnvcjw82j7gqt2rafgdmlmwmqnn3hvcmdm09rjqcgrtxs", // Segwit v1
+            "grs1q2s3rjwvam9dt2ftt4sqxqjf3twav0gdx0k0q2etxflx38c3x8tnslkylay", // Segwit v0
+            "grs1py3m7vwnghyne9gnvcjw82j7gqt2rafgdmlmwmqnn3hvcmdm09rjqhnu8f5", // Segwit v1
         ];
 
         for address in addresses {
@@ -252,10 +252,10 @@ mod tests {
     fn encode_to_fmt_lowercase() {
         let program = witness_program();
         let mut address = String::new();
-        encode_to_fmt_unchecked(&mut address, &hrp::BC, VERSION_0, &program)
+        encode_to_fmt_unchecked(&mut address, &hrp::GRS, VERSION_0, &program)
             .expect("failed to encode address to QR code");
 
-        let want = "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4";
+        let want = "grs1qw508d6qejxtdg4y5r3zarvary0c5xw7k3k4sj5";
         assert_eq!(address, want);
     }
 
@@ -263,10 +263,10 @@ mod tests {
     fn encode_to_fmt_uppercase() {
         let program = witness_program();
         let mut address = String::new();
-        encode_to_fmt_unchecked_uppercase(&mut address, &hrp::BC, VERSION_0, &program)
+        encode_to_fmt_unchecked_uppercase(&mut address, &hrp::GRS, VERSION_0, &program)
             .expect("failed to encode address to QR code");
 
-        let want = "BC1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7KV8F3T4";
+        let want = "GRS1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7K3K4SJ5";
         assert_eq!(address, want);
     }
 }

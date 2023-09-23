@@ -55,7 +55,7 @@
 //! assert!(CheckedHrpstring::new::<Bech32m>(s).is_err());
 //!
 //! // A valid Bitcoin taproot address.
-//! let s = "bc1pdp43hj65vxw49rts6kcw35u6r6tgzguyr03vvveeewjqpn05efzq7un9w0";
+//! let s = "grs1pdp43hj65vxw49rts6kcw35u6r6tgzguyr03vvveeewjqpn05efzq38vfpt";
 //! assert!(UncheckedHrpstring::new(s).is_ok());
 //! assert!(CheckedHrpstring::new::<Bech32m>(s).is_ok());
 //! assert!(SegwitHrpstring::new(s).is_ok());
@@ -63,10 +63,10 @@
 //! assert!(CheckedHrpstring::new::<Bech32>(s).is_err());
 //!
 //! // Get the HRP, witness version, and encoded data.
-//! let address = "bc1pdp43hj65vxw49rts6kcw35u6r6tgzguyr03vvveeewjqpn05efzq7un9w0";
+//! let address = "grs1pdp43hj65vxw49rts6kcw35u6r6tgzguyr03vvveeewjqpn05efzq38vfpt";
 //! let segwit = SegwitHrpstring::new(address).expect("valid segwit address");
 //! let _encoded_data = segwit.byte_iter();
-//! assert_eq!(segwit.hrp(), Hrp::parse("bc").unwrap());
+//! assert_eq!(segwit.hrp(), Hrp::parse("grs").unwrap());
 //! assert_eq!(segwit.witness_version(), VERSION_1);
 //! ```
 //!
@@ -99,7 +99,7 @@ const SEP: char = '1';
 /// ```
 /// use bech32::{Bech32, Bech32m, primitives::decode::UncheckedHrpstring};
 ///
-/// let addr = "BC1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7KV8F3T4";
+/// let addr = "GRS1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7K3K4SJ5";
 /// let unchecked = UncheckedHrpstring::new(addr).expect("valid bech32 character encoded string");
 /// if unchecked.has_valid_checksum::<Bech32>() {
 ///     // Remove the checksum and do something with the data.
@@ -340,7 +340,7 @@ impl<'s> CheckedHrpstring<'s> {
 /// use bech32::primitives::decode::SegwitHrpstring;
 ///
 /// // Parse a segwit V0 address.
-/// let address = "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq";
+/// let address = "grs1qar0srrr7xfkvy5l643lydnw9re59gtzzncg65p";
 /// let segwit = SegwitHrpstring::new(address).expect("valid segwit address");
 ///
 /// // Do something with the encoded data.
@@ -413,10 +413,10 @@ impl<'s> SegwitHrpstring<'s> {
         checked.validate_segwit()
     }
 
-    /// Returns `true` if the HRP is "bc" or "tb".
+    /// Returns `true` if the HRP is "grs" or "tgrs".
     ///
-    /// BIP-173 requires that the HRP is "bc" or "tb" but software in the Bitcoin ecosystem uses
-    /// other HRPs, specifically "bcrt" for regtest addresses. We provide this function in order to
+    /// BIP-173 requires that the HRP is "grs" or "tgrs" but software in the Bitcoin ecosystem uses
+    /// other HRPs, specifically "grsrt" for regtest addresses. We provide this function in order to
     /// be BIP-173 compliant but their are no restrictions on the HRP of [`SegwitHrpstring`].
     #[inline]
     pub fn has_valid_hrp(&self) -> bool { self.hrp().is_valid_segwit() }
@@ -902,8 +902,8 @@ mod tests {
     fn bip_350_invalid_because_of_invalid_checksum() {
         use ChecksumError::*;
 
-        // Note the "bc1p2" test case is not from the bip test vectors.
-        let invalid: Vec<&str> = vec!["in1muywd", "bc1p2"];
+        // Note the "grs1p2" test case is not from the bip test vectors.
+        let invalid: Vec<&str> = vec!["in1muywd", "grs1p2"];
 
         for s in invalid {
             let err =
@@ -920,9 +920,9 @@ mod tests {
 
     #[test]
     fn check_hrp_uppercase_returns_lower() {
-        let addr = "BC1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7KV8F3T4";
+        let addr = "GRS1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7K3K4SJ5";
         let unchecked = UncheckedHrpstring::new(addr).expect("failed to parse address");
-        assert_eq!(unchecked.hrp(), Hrp::parse_unchecked("bc"));
+        assert_eq!(unchecked.hrp(), Hrp::parse_unchecked("grs"));
     }
 
     #[test]
@@ -941,7 +941,7 @@ mod tests {
     #[test]
     fn mainnet_valid_addresses() {
         let addresses = vec![
-            "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq",
+            "grs1qar0srrr7xfkvy5l643lydnw9re59gtzzncg65p",
             "23451QAR0SRRR7XFKVY5L643LYDNW9RE59GTZZLKULZK",
         ];
         for valid in addresses {
@@ -963,11 +963,11 @@ mod tests {
         }
     }
     check_invalid_segwit_addresses! {
-        invalid_segwit_address_0, "missing hrp", "1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq";
+        invalid_segwit_address_0, "missing hrp", "1qar0srrr7xfkvy5l643lydnw9re59gtzzncg65p";
         invalid_segwit_address_1, "missing data-checksum", "91111";
-        invalid_segwit_address_2, "invalid witness version", "bc14r0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq";
-        invalid_segwit_address_3, "invalid checksum length", "bc1q5mdq";
-        invalid_segwit_address_4, "missing data", "bc1qwf5mdq";
-        invalid_segwit_address_5, "invalid program length", "bc14r0srrr7xfkvy5l643lydnw9rewf5mdq";
+        invalid_segwit_address_2, "invalid witness version", "grs14r0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq";
+        invalid_segwit_address_3, "invalid checksum length", "grs1q5mdq";
+        invalid_segwit_address_4, "missing data", "grs1qwf5mdq";
+        invalid_segwit_address_5, "invalid program length", "grs14r0srrr7xfkvy5l643lydnw9rewf5mdq";
     }
 }

@@ -22,11 +22,11 @@ use crate::Case;
 const MAX_HRP_LEN: usize = 83;
 
 macro_rules! define_hrp_const {
-    ($name:ident, $size:literal, $zero:literal, $one:literal, $two:literal, $three:literal, $network:literal) => {
-/// "The human-readable part for the Bitcoin $network."
+    ($name:ident, $size:literal, $zero:literal, $one:literal, $two:literal, $three:literal, $four:literal, $network:literal) => {
+/// "The human-readable part for the Groestlcoin $network."
         #[rustfmt::skip]
         pub const $name: Hrp = Hrp { buf: [
-            $zero, $one, $two, $three,
+            $zero, $one, $two, $three, $four,
     0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -34,13 +34,13 @@ macro_rules! define_hrp_const {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0,
         ], size: $size };
     };
 }
-define_hrp_const! {BC, 2, 98, 99, 0, 0, "network (mainnet)."}
-define_hrp_const! {TB, 2, 116, 98, 0, 0, "testnet networks (testnet, signet)."}
-define_hrp_const! {BCRT, 4, 98, 99, 114, 116, "regtest network."}
+define_hrp_const! {GRS, 3, 103, 114, 115, 0, 0, "network (mainnet)."}
+define_hrp_const! {TGRS, 4, 116, 103, 114, 115, 0, "testnet networks (testnet, signet)."}
+define_hrp_const! {GRSRT, 5, 103, 114, 115, 114, 116, "regtest network."}
 
 /// The human-readable part (human readable prefix before the '1' separator).
 #[derive(Clone, Copy, Debug)]
@@ -54,7 +54,7 @@ pub struct Hrp {
 impl Hrp {
     /// Parses the human-readable part checking it is valid as defined by [BIP-173].
     ///
-    /// This does _not_ check that the `hrp` is an in-use HRP within Bitcoin (eg, "bc"), rather it
+    /// This does _not_ check that the `hrp` is an in-use HRP within Groestlcoin (eg, "grs"), rather it
     /// checks that the HRP string is valid as per the specification in [BIP-173]:
     ///
     /// > The human-readable part, which is intended to convey the type of data, or anything else that
@@ -189,7 +189,7 @@ impl Hrp {
 
     /// Returns `true` if this [`Hrp`] is valid according to the bips.
     ///
-    /// [BIP-173] states that the HRP must be either "bc" or "tb".
+    /// [BIP-173] states that the HRP must be either "grs" or "tgrs".
     ///
     /// [BIP-173]: https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki#user-content-Segwit_address_format
     #[inline]
@@ -197,21 +197,21 @@ impl Hrp {
         self.is_valid_on_mainnet() || self.is_valid_on_testnet()
     }
 
-    /// Returns `true` if this hrpstring is valid on the Bitcoin network i.e., HRP is "bc".
+    /// Returns `true` if this hrpstring is valid on the Groestlcoin network i.e., HRP is "grs".
     #[inline]
-    pub fn is_valid_on_mainnet(&self) -> bool { *self == self::BC }
+    pub fn is_valid_on_mainnet(&self) -> bool { *self == self::GRS }
 
-    /// Returns `true` if this hrpstring is valid on the Bitcoin testnet network i.e., HRP is "tb".
+    /// Returns `true` if this hrpstring is valid on the Groestlcoin testnet network i.e., HRP is "tgrs".
     #[inline]
-    pub fn is_valid_on_testnet(&self) -> bool { *self == self::TB }
+    pub fn is_valid_on_testnet(&self) -> bool { *self == self::TGRS }
 
-    /// Returns `true` if this hrpstring is valid on the Bitcoin signet network i.e., HRP is "tb".
+    /// Returns `true` if this hrpstring is valid on the Groestlcoin signet network i.e., HRP is "tgrs".
     #[inline]
-    pub fn is_valid_on_signet(&self) -> bool { *self == self::TB }
+    pub fn is_valid_on_signet(&self) -> bool { *self == self::TGRS }
 
-    /// Returns `true` if this hrpstring is valid on the Bitcoin regtest network i.e., HRP is "bcrt".
+    /// Returns `true` if this hrpstring is valid on the Groestlcoin regtest network i.e., HRP is "grsrt".
     #[inline]
-    pub fn is_valid_on_regtest(&self) -> bool { *self == self::BCRT }
+    pub fn is_valid_on_regtest(&self) -> bool { *self == self::GRSRT }
 }
 
 /// Displays the human-readable part.
@@ -538,9 +538,9 @@ mod tests {
     #[cfg(feature = "alloc")]
     #[test]
     fn hrp_consts() {
-        use crate::primitives::hrp::{BC, BCRT, TB};
-        assert_eq!(BC, Hrp::parse_unchecked("bc"));
-        assert_eq!(TB, Hrp::parse_unchecked("tb"));
-        assert_eq!(BCRT, Hrp::parse_unchecked("bcrt"));
+        use crate::primitives::hrp::{GRS, GRSRT, TGRS};
+        assert_eq!(GRS, Hrp::parse_unchecked("grs"));
+        assert_eq!(TGRS, Hrp::parse_unchecked("tgrs"));
+        assert_eq!(GRSRT, Hrp::parse_unchecked("grsrt"));
     }
 }
