@@ -3,8 +3,8 @@
 #[doc(inline)]
 pub use crate::primitives::hrp::Hrp;
 #[doc(inline)]
-pub use crate::primitives::hrp::BC;
+pub use crate::primitives::hrp::GRS;
 #[doc(inline)]
-pub use crate::primitives::hrp::BCRT;
+pub use crate::primitives::hrp::GRSRT;
 #[doc(inline)]
-pub use crate::primitives::hrp::TB;
+pub use crate::primitives::hrp::TGRS;
