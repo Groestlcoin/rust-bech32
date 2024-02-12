@@ -11,7 +11,7 @@
 //! # Examples
 //!
 //! ```
-//! use bech32::{Bech32, ByteIterExt, Fe32IterExt, Fe32, Hrp};
+//! use bech32grs::{Bech32, ByteIterExt, Fe32IterExt, Fe32, Hrp};
 //!
 //! let data = [
 //!     0x75, 0x1e, 0x76, 0xe8, 0x19, 0x91, 0x96, 0xd4,

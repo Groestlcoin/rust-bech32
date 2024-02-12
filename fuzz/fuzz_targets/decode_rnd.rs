@@ -1,7 +1,7 @@
-extern crate bech32;
+extern crate bech32grs;
 
-use bech32::primitives::decode::{CheckedHrpstring, SegwitHrpstring, UncheckedHrpstring};
-use bech32::Bech32m;
+use bech32grs::primitives::decode::{CheckedHrpstring, SegwitHrpstring, UncheckedHrpstring};
+use bech32grs::Bech32m;
 
 // Checks that we do not crash if passed random data while decoding.
 fn do_test(data: &[u8]) {

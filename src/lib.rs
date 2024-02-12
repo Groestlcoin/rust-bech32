@@ -29,7 +29,7 @@
 //!
 //! ```
 //! # #[cfg(feature = "alloc")] {
-//! use bech32::{hrp, segwit, Hrp, Bech32m};
+//! use bech32grs::{hrp, segwit, Hrp, Bech32m};
 //!
 //! const DATA: [u8; 20] = [0xab; 20]; // Arbitrary data to be encoded.
 //! const ADDR: &str = "abc14w46h2at4w46h2at4w46h2at4w46h2at958ngu";
@@ -37,7 +37,7 @@
 //!
 //! // Encode arbitrary data using "abc" as the human-readable part and append a bech32m checksum.
 //! let hrp = Hrp::parse("abc").expect("valid hrp");
-//! let address = bech32::encode::<Bech32m>(hrp, &DATA).expect("failed to encode address");
+//! let address = bech32grs::encode::<Bech32m>(hrp, &DATA).expect("failed to encode address");
 //! assert_eq!(address, ADDR);
 //!
 //! // Encode arbitrary data as a Groestlcoin taproot address.
@@ -46,7 +46,7 @@
 //!
 //! // No-alloc: Encode without allocating (ignoring that String::new() allocates :).
 //! let mut buf = String::new();
-//! bech32::encode_to_fmt::<Bech32m, String>(&mut buf, hrp, &DATA).expect("failed to encode to buffer");
+//! bech32grs::encode_to_fmt::<Bech32m, String>(&mut buf, hrp, &DATA).expect("failed to encode to buffer");
 //! assert_eq!(buf, ADDR);
 //! # }
 //! ```
@@ -55,8 +55,8 @@
 //!
 //! ```
 //! # #[cfg(feature = "alloc")] {
-//! use bech32::primitives::decode::{CheckedHrpstring, SegwitHrpstring};
-//! use bech32::{hrp, segwit, Hrp, Bech32m};
+//! use bech32grs::primitives::decode::{CheckedHrpstring, SegwitHrpstring};
+//! use bech32grs::{hrp, segwit, Hrp, Bech32m};
 //!
 //! const DATA: [u8; 20] = [0xab; 20]; // Arbitrary data to be encoded.
 //! const ADDR: &str = "abc14w46h2at4w46h2at4w46h2at4w46h2at958ngu";
@@ -67,7 +67,7 @@
 //! // The input address MUST include a valid bech32 or bech32m checksum, for individual specific
 //! // checksum algorithms see [`decode_bech32`], [`decode_bech32m`], [`decode_no_checksum`] or use
 //! // the [`primitives::decode::CheckedHrpstring`] type directly.
-//! let (hrp, data) = bech32::decode(&ADDR).expect("failed to decode");
+//! let (hrp, data) = bech32grs::decode(&ADDR).expect("failed to decode");
 //! assert_eq!(hrp, Hrp::parse("abc").unwrap());
 //! assert_eq!(data, DATA);
 //!
@@ -91,7 +91,7 @@
 //!
 //! ```
 //! # #[cfg(feature = "alloc")] {
-//! use bech32::Checksum;
+//! use bech32grs::Checksum;
 //!
 //! /// The codex32 checksum algorithm, defined in BIP-93.
 //! #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -174,8 +174,8 @@ pub mod segwit;
 /// # Examples
 /// ```
 /// # #[cfg(feature = "alloc")] {
-/// use bech32::{decode, Bech32, Bech32m, NoChecksum};
-/// use bech32::primitives::decode::CheckedHrpstring;
+/// use bech32grs::{decode, Bech32, Bech32m, NoChecksum};
+/// use bech32grs::primitives::decode::CheckedHrpstring;
 ///
 /// const BECH32: &str = "abc14w46h2at4w46h2at4w46h2at4w46h2atsghld7";
 /// const BECH32M: &str = "abc14w46h2at4w46h2at4w46h2at4w46h2at958ngu";

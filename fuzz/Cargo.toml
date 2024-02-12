@@ -15,7 +15,7 @@ honggfuzz_fuzz = ["honggfuzz"]
 honggfuzz = { version = "0.5", default-features = false, optional = true }
 afl = { version = "0.3", optional = true }
 libc = "0.2"
-bech32 = { path = ".." }
+bech32grs = { path = ".." }
 
 # Prevent this from interfering with workspaces
 [workspace]

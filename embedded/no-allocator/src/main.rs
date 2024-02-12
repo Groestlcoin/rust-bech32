@@ -8,8 +8,8 @@
 #![no_std]
 
 use arrayvec::ArrayString;
-use bech32::primitives::decode::CheckedHrpstring;
-use bech32::{Bech32, Hrp};
+use bech32grs::primitives::decode::CheckedHrpstring;
+use bech32grs::{Bech32, Hrp};
 use cortex_m_rt::entry;
 use cortex_m_semihosting::{debug, hprintln};
 use panic_halt as _;
@@ -23,7 +23,7 @@ fn main() -> ! {
     let data = [0x00u8, 0x01, 0x02];
     let hrp = Hrp::parse("bech32").expect("failed to parse hrp");
 
-    bech32::encode_to_fmt::<Bech32, _>(&mut encoded, hrp, &data)
+    bech32grs::encode_to_fmt::<Bech32, _>(&mut encoded, hrp, &data)
         .expect("failed to encode");
     test(&*encoded == "bech321qqqsyrhqy2a");
 

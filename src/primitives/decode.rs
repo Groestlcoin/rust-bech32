@@ -33,9 +33,9 @@
 //! # Examples
 //!
 //! ```
-//! use bech32::{Bech32, Bech32m, Fe32, Hrp};
-//! use bech32::primitives::decode::{CheckedHrpstring, SegwitHrpstring, UncheckedHrpstring};
-//! use bech32::segwit::VERSION_1;
+//! use bech32grs::{Bech32, Bech32m, Fe32, Hrp};
+//! use bech32grs::primitives::decode::{CheckedHrpstring, SegwitHrpstring, UncheckedHrpstring};
+//! use bech32grs::segwit::VERSION_1;
 //!
 //! // An arbitrary HRP and a string of valid bech32 characters.
 //! let s = "abcd143hj65vxw49rts6kcw35u6r6tgzguyr03vvveeewjqpn05efzq444444";
@@ -97,7 +97,7 @@ const SEP: char = '1';
 /// # Examples
 ///
 /// ```
-/// use bech32::{Bech32, Bech32m, primitives::decode::UncheckedHrpstring};
+/// use bech32grs::{Bech32, Bech32m, primitives::decode::UncheckedHrpstring};
 ///
 /// let addr = "GRS1QW508D6QEJXTDG4Y5R3ZARVARY0C5XW7K3K4SJ5";
 /// let unchecked = UncheckedHrpstring::new(addr).expect("valid bech32 character encoded string");
@@ -222,7 +222,7 @@ impl<'s> UncheckedHrpstring<'s> {
 /// # Examples
 ///
 /// ```
-/// use bech32::{Bech32m, primitives::decode::CheckedHrpstring};
+/// use bech32grs::{Bech32m, primitives::decode::CheckedHrpstring};
 ///
 /// // Parse a general checksummed bech32 encoded string.
 /// let s = "abcd14g08d6qejxtdg4y5r3zarvary0c5xw7knqc5r8";
@@ -338,7 +338,7 @@ impl<'s> CheckedHrpstring<'s> {
 /// # Examples
 ///
 /// ```
-/// use bech32::primitives::decode::SegwitHrpstring;
+/// use bech32grs::primitives::decode::SegwitHrpstring;
 ///
 /// // Parse a segwit V0 address.
 /// let address = "grs1qar0srrr7xfkvy5l643lydnw9re59gtzzncg65p";

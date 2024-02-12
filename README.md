@@ -1,8 +1,8 @@
-Rust Bech32
+Rust bech32grs
 ===========
 
-[![Docs.rs badge](https://docs.rs/bech32/badge.svg)](https://docs.rs/bech32/)
-[![Continuous Integration](https://github.com/rust-bitcoin/rust-bech32/workflows/Continuous%20Integration/badge.svg)](https://github.com/rust-bitcoin/rust-bech32/actions?query=workflow%3A%22Continuous+Integration%22)
+[![Docs.rs badge](https://docs.rs/bech32grs/badge.svg)](https://docs.rs/bech32grs/)
+[![Continuous Integration](https://github.com/Groestlcoin/rust-bech32/workflows/Continuous%20Integration/badge.svg)](https://github.com/Groestlcoin/rust-bech32/actions?query=workflow%3A%22Continuous+Integration%22)
 
 Rust implementation of the Bech32 encoding format described in [BIP-0173](https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki)
 and Bech32m encoding format described in [BIP-0350](https://github.com/bitcoin/bips/blob/master/bip-0350.mediawiki).

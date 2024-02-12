@@ -6,7 +6,7 @@ extern crate alloc;
 use core::alloc::Layout;
 
 use alloc_cortex_m::CortexMHeap;
-use bech32::{Bech32m, Hrp};
+use bech32grs::{Bech32m, Hrp};
 use cortex_m::asm;
 use cortex_m_rt::entry;
 use cortex_m_semihosting::{debug, hprintln};
@@ -27,12 +27,12 @@ fn main() -> ! {
     let data = [0x00u8, 0x01, 0x02];
     let hrp = Hrp::parse("bech32").expect("failed to parse hrp");
 
-    let encoded = bech32::encode::<Bech32m>(hrp, &data).expect("failed to encode");
+    let encoded = bech32grs::encode::<Bech32m>(hrp, &data).expect("failed to encode");
     test(encoded == "bech321qqqsyktsg0l".to_string());
 
     hprintln!("{}", encoded).unwrap();
 
-    let (got_hrp, got_data) = bech32::decode(&encoded).expect("failed to decode");
+    let (got_hrp, got_data) = bech32grs::decode(&encoded).expect("failed to decode");
 
     test(got_hrp == hrp);
     test(&got_data == &data);

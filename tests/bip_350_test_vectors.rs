@@ -2,11 +2,11 @@
 
 #![cfg(feature = "alloc")]
 
-use bech32::primitives::decode::{
+use bech32grs::primitives::decode::{
     CheckedHrpstring, CheckedHrpstringError, ChecksumError, SegwitHrpstring, SegwitHrpstringError,
     UncheckedHrpstring,
 };
-use bech32::{Bech32, Bech32m};
+use bech32grs::{Bech32, Bech32m};
 
 // This is a separate test because we correctly identify this string as invalid but not for the
 // reason given in the bip.
@@ -55,8 +55,8 @@ macro_rules! check_valid_address_roundtrip {
             #[test]
             #[cfg(feature = "alloc")]
             fn $test_name() {
-                let (hrp, version, program) = bech32::segwit::decode($addr).expect("failed to decode valid address");
-                let encoded = bech32::segwit::encode(&hrp, version, &program).expect("failed to encode address");
+                let (hrp, version, program) = bech32grs::segwit::decode($addr).expect("failed to decode valid address");
+                let encoded = bech32grs::segwit::encode(&hrp, version, &program).expect("failed to encode address");
 
                 // The bips specifically say that encoder should output lowercase characters so we uppercase manually.
                 if encoded != $addr {

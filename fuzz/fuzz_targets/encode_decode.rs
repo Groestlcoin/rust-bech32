@@ -1,8 +1,8 @@
-extern crate bech32;
+extern crate bech32grs;
 
 use std::str;
 
-use bech32::{Bech32m, Hrp};
+use bech32grs::{Bech32m, Hrp};
 
 fn do_test(data: &[u8]) {
     if data.len() < 1 {
@@ -23,9 +23,9 @@ fn do_test(data: &[u8]) {
             match Hrp::parse(&s) {
                 Err(_) => return,
                 Ok(hrp) => {
-                    if let Ok(address) = bech32::encode::<Bech32m>(hrp, dp) {
-                        let (hrp, data) = bech32::decode(&address).expect("should be able to decode own encoding");
-                        assert_eq!(bech32::encode::<Bech32m>(hrp, &data).unwrap(), address);
+                    if let Ok(address) = bech32grs::encode::<Bech32m>(hrp, dp) {
+                        let (hrp, data) = bech32grs::decode(&address).expect("should be able to decode own encoding");
+                        assert_eq!(bech32grs::encode::<Bech32m>(hrp, &data).unwrap(), address);
                     }
                 }
             }

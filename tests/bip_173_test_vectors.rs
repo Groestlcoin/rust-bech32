@@ -2,16 +2,18 @@
 
 #![cfg(feature = "alloc")]
 
-use bech32::primitives::decode::{
+use bech32grs::primitives::decode::{
     CheckedHrpstring, ChecksumError, SegwitHrpstring, UncheckedHrpstring,
 };
-use bech32::{Bech32, Bech32m, ByteIterExt, Fe32IterExt};
+use bech32grs::{Bech32, Bech32m, ByteIterExt, Fe32IterExt};
 
 // This is a separate test because we correctly identify this string as invalid but not for the
 // reason given in the bip.
 #[test]
 fn bip_173_checksum_calculated_with_uppercase_form() {
-    use bech32::primitives::decode::{CheckedHrpstringError, ChecksumError, SegwitHrpstringError};
+    use bech32grs::primitives::decode::{
+        CheckedHrpstringError, ChecksumError, SegwitHrpstringError,
+    };
 
     // BIP-173 states reason for error should be: "checksum calculated with uppercase form of HRP".
     let s = "A1G7SGD8";
@@ -59,8 +61,8 @@ macro_rules! check_valid_address_roundtrip {
                 // bech32 checksum algorithm can be used with any witness version, and this is
                 // tested by the test vectors. However when BIP-350 came into effect only witness
                 // version 0 uses bech32 (and this is enforced by encode/decode).
-                if let Ok((hrp, bech32::Fe32::Q, program)) = bech32::segwit::decode($addr) {
-                    let encoded = bech32::segwit::encode_v0(&hrp, &program).expect("failed to encode address");
+                if let Ok((hrp, bech32grs::Fe32::Q, program)) = bech32grs::segwit::decode($addr) {
+                    let encoded = bech32grs::segwit::encode_v0(&hrp, &program).expect("failed to encode address");
                     // The bips specifically say that encoder should output lowercase characters so we uppercase manually.
                     if encoded != $addr {
                         let got = encoded.to_uppercase();

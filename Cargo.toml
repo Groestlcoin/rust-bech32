@@ -1,9 +1,9 @@
 [package]
-name = "bech32"
+name = "bech32grs"
 version = "0.10.0-beta"
 authors = ["Groestlcoin Developers <groestlcoin@gmail.com>"]
 repository = "https://github.com/Groestlcoin/rust-bech32"
-documentation = "https://docs.rs/bech32/"
+documentation = "https://docs.rs/bech32grs/"
 description = "Encodes and decodes the Bech32 format and implements the bech32 and bech32m checksums"
 readme = "README.md"
 keywords = ["base32", "encoding", "bech32", "groestlcoin", "cryptocurrency"]

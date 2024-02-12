@@ -11,7 +11,7 @@
 //!
 //! ```
 //! # #[cfg(feature = "alloc")] {
-//! use bech32::{hrp, segwit, Fe32, Hrp};
+//! use bech32grs::{hrp, segwit, Fe32, Hrp};
 //!
 //! let witness_prog = [
 //!     0x75, 0x1e, 0x76, 0xe8, 0x19, 0x91, 0x96, 0xd4,
@@ -62,7 +62,7 @@ use crate::primitives::{Bech32, Bech32m};
 /// # Examples
 ///
 /// ```
-/// use bech32::segwit;
+/// use bech32grs::segwit;
 /// let address = "grs1py3m7vwnghyne9gnvcjw82j7gqt2rafgdmlmwmqnn3hvcmdm09rjqhnu8f5";
 /// let (_hrp, _witness_version, _witness_program) = segwit::decode(address).expect("failed to decode address");
 /// ```
