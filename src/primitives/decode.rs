@@ -153,10 +153,10 @@ impl<'s> UncheckedHrpstring<'s> {
     /// # Examples
     ///
     /// ```
-    /// use bech32::primitives::decode::UncheckedHrpstring;
+    /// use bech32grs::primitives::decode::UncheckedHrpstring;
     ///
-    /// let addr = "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq";
-    /// let ascii = "qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq";
+    /// let addr = "grs1qar0srrr7xfkvy5l643lydnw9re59gtzzncg65p";
+    /// let ascii = "qar0srrr7xfkvy5l643lydnw9re59gtzzncg65p";
     ///
     /// let unchecked = UncheckedHrpstring::new(&addr).unwrap();
     /// assert!(unchecked.data_part_ascii().iter().eq(ascii.as_bytes().iter()))
@@ -173,10 +173,10 @@ impl<'s> UncheckedHrpstring<'s> {
     /// # Examples
     ///
     /// ```
-    /// use bech32::{primitives::decode::UncheckedHrpstring, Fe32};
+    /// use bech32grs::{primitives::decode::UncheckedHrpstring, Fe32};
     ///
-    /// let addr = "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq";
-    /// let ascii = "ar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq";
+    /// let addr = "grs1qar0srrr7xfkvy5l643lydnw9re59gtzzncg65p";
+    /// let ascii = "ar0srrr7xfkvy5l643lydnw9re59gtzzncg65p";
     ///
     /// let mut unchecked = UncheckedHrpstring::new(&addr).unwrap();
     /// let witness_version = unchecked.remove_witness_version().unwrap();
@@ -204,10 +204,10 @@ impl<'s> UncheckedHrpstring<'s> {
     /// # Examples
     ///
     /// ```
-    /// use bech32::{primitives::decode::UncheckedHrpstring, Fe32};
+    /// use bech32grs::{primitives::decode::UncheckedHrpstring, Fe32};
     ///
     /// // Note the invalid checksum!
-    /// let addr = "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzffffff";
+    /// let addr = "grs1qar0srrr7xfkvy5l643lydnw9re59gtzzffffff";
     ///
     /// let unchecked = UncheckedHrpstring::new(&addr).unwrap();
     /// assert_eq!(unchecked.witness_version(), Some(Fe32::Q));
@@ -365,9 +365,9 @@ impl<'s> CheckedHrpstring<'s> {
     /// # Examples
     ///
     /// ```
-    /// use bech32::{Bech32, primitives::decode::CheckedHrpstring};
+    /// use bech32grs::{Bech32, primitives::decode::CheckedHrpstring};
     ///
-    /// let addr = "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq";
+    /// let addr = "grs1qar0srrr7xfkvy5l643lydnw9re59gtzzncg65p";
     /// let ascii = "qar0srrr7xfkvy5l643lydnw9re59gtzz";
     ///
     /// let checked = CheckedHrpstring::new::<Bech32>(&addr).unwrap();
@@ -385,9 +385,9 @@ impl<'s> CheckedHrpstring<'s> {
     /// # Examples
     ///
     /// ```
-    /// use bech32::{primitives::decode::CheckedHrpstring, Bech32, Fe32};
+    /// use bech32grs::{primitives::decode::CheckedHrpstring, Bech32, Fe32};
     ///
-    /// let addr = "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq";
+    /// let addr = "grs1qar0srrr7xfkvy5l643lydnw9re59gtzzncg65p";
     /// let ascii = "ar0srrr7xfkvy5l643lydnw9re59gtzz";
     ///
     /// let mut checked = CheckedHrpstring::new::<Bech32>(&addr).unwrap();
@@ -416,9 +416,9 @@ impl<'s> CheckedHrpstring<'s> {
     /// # Examples
     ///
     /// ```
-    /// use bech32::{primitives::decode::CheckedHrpstring, Bech32, Fe32};
+    /// use bech32grs::{primitives::decode::CheckedHrpstring, Bech32, Fe32};
     ///
-    /// let addr = "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq";
+    /// let addr = "grs1qar0srrr7xfkvy5l643lydnw9re59gtzzncg65p";
     ///
     /// let checked = CheckedHrpstring::new::<Bech32>(&addr).unwrap();
     /// assert_eq!(checked.witness_version(), Some(Fe32::Q));
@@ -642,9 +642,9 @@ impl<'s> SegwitHrpstring<'s> {
     /// # Examples
     ///
     /// ```
-    /// use bech32::{Bech32, primitives::decode::SegwitHrpstring};
+    /// use bech32grs::{Bech32, primitives::decode::SegwitHrpstring};
     ///
-    /// let addr = "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq";
+    /// let addr = "grs1qar0srrr7xfkvy5l643lydnw9re59gtzzncg65p";
     /// let ascii = "ar0srrr7xfkvy5l643lydnw9re59gtzz";
     ///
     /// let segwit = SegwitHrpstring::new(&addr).unwrap();
@@ -1241,9 +1241,9 @@ mod tests {
     check_invalid_segwit_addresses! {
         invalid_segwit_address_0, "missing hrp", "1qar0srrr7xfkvy5l643lydnw9re59gtzzncg65p";
         invalid_segwit_address_1, "missing data-checksum", "91111";
-        invalid_segwit_address_2, "invalid witness version", "grs14r0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq";
+        invalid_segwit_address_2, "invalid witness version", "grs14r0srrr7xfkvy5l643lydnw9re59gtzzncg65p";
         invalid_segwit_address_3, "invalid checksum length", "grs1q5mdq";
         invalid_segwit_address_4, "missing data", "grs1qwf5mdq";
-        invalid_segwit_address_5, "invalid program length", "grs14r0srrr7xfkvy5l643lydnw9rewf5mdq";
+        invalid_segwit_address_5, "invalid program length", "grs14r0srrr7xfkvy5l643lydnw9rencg65p";
     }
 }

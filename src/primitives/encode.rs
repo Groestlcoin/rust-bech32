@@ -393,7 +393,7 @@ mod tests {
     #[test]
     #[cfg(feature = "alloc")]
     fn hrpstring_iter_bytes() {
-        let hrp = Hrp::parse_unchecked("bc");
+        let hrp = Hrp::parse_unchecked("grs");
         let fes = DATA.iter().copied().bytes_to_fes();
         let iter = fes.with_checksum::<Bech32>(&hrp).with_witness_version(Fe32::Q);
 
