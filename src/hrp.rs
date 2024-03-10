@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: MIT
 
+//! Re-exports the hrp types from [`primitives::hrp`] to make importing ergonomic for the top level APIs.
+//!
+//! [`primitives::hrp`]: crate::primitives::hrp
+
 #[doc(inline)]
-pub use crate::primitives::hrp::Hrp;
-#[doc(inline)]
-pub use crate::primitives::hrp::GRS;
-#[doc(inline)]
-pub use crate::primitives::hrp::GRSRT;
-#[doc(inline)]
-pub use crate::primitives::hrp::TGRS;
+pub use crate::primitives::hrp::{Hrp, GRS, GRSRT, TGRS};

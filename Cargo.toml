@@ -1,6 +1,6 @@
 [package]
 name = "bech32grs"
-version = "0.10.0-beta"
+version = "0.11.0"
 authors = ["Groestlcoin Developers <groestlcoin@gmail.com>"]
 repository = "https://github.com/Groestlcoin/rust-bech32"
 documentation = "https://docs.rs/bech32grs/"
